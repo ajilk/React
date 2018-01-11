@@ -6,7 +6,7 @@ A simple game that tests your reaction speed
 Once you are in the game, you will be greeted with the main page
 which will display different modes. After you have selected a mode 
 with its letter assigned, the game will start. You can click Q to quit
-to the main menu and one more time quit the application
+to the main menu and one more time to quit the application
 
 ### Observations
 (pending)
