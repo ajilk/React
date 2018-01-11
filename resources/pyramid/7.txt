@@ -1,0 +1,20 @@
+                                  NN;
+                                 NNN;;
+                               NNNNN;;;
+                              NNNNNNN;;;;
+                            NNNNNNNNN;;;;;
+                           NNNNNNNNNN;;;;;;
+                         NNNNNNNNNNNNN;;;;;;;
+                        NNNNNNNNNNNNNN;;;;;;;;
+                       NNNNNNNNNNNNNNN;;;;;;;;;
+                     NNNNNNNNNNNNNNNNNN;;;;;;;;;;
+                    NNNNNNNNNNNNNNNNNNN;;;;;;;;;;;
+                  NNNNNNNNNNNNNNNNNNNNN;;;;;;;;;;;;
+                 NNNNNNNNNNNNNNNNNNNNNNN;;;;;;;;;;;;;      
+               NNNNNNNNNNNNNNNNNNNNNNNNN;;;;;;;;;;;;       
+                NNNNNNNNNNNNNNNNNNNNNNNN;;;;;;;;;;;        
+                     NNNNNNNNNNNNNNNNNNNN;;;;;;;;          
+                          NNNNNNNNNNNNNNN;;;;;;            
+                               NNNNNNNNNN;;;;              
+                                    NNNNNN;;               
+                                                          

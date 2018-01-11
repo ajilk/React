@@ -7,7 +7,8 @@ Screen::Screen(){
 	noecho();
 	use_default_colors();
 	start_color();
-	nodelay(stdscr, TRUE);
+	init_pair(1, COLOR_BLUE, COLOR_BLUE);
+	init_pair(2, COLOR_RED, COLOR_RED);
 }
 
 bool Screen::kbhit(){
@@ -19,9 +20,17 @@ bool Screen::kbhit(){
 		return false;
 }
 
+void Screen::flushInput(){
+	noDelay();
+	int ch;
+	do{
+		ch = getch();
+	}while(ch != ERR);
+	Delay();
+}
+
 void Screen::print(Image img, Coordinate start){
 	vector<char> image = img.getImage();
-	int color = img.getColor();
 	Coordinate pos(0,0);
 	for(int i=0; i<image.size(); i++){
 		char ch = image.at(i);	
@@ -31,13 +40,13 @@ void Screen::print(Image img, Coordinate start){
 				pos.Y++; 
 				break;
 			case ' ': 
-//				mvprintw(start.Y+pos.Y, start.X+pos.X, "%c", ch); 
+				mvprintw(start.Y+pos.Y, start.X+pos.X, "%c", ch); 
 				pos.X++; 
 				break;
 			default:
-				attron(COLOR_PAIR(color)); 
+				attron(COLOR_PAIR(img.color)); 
 				mvprintw(start.Y+pos.Y, start.X+pos.X, "%c", ch); pos.X++;
-				attroff(COLOR_PAIR(color)); 
+				attroff(COLOR_PAIR(img.color)); 
 				break;
 		}
 	}
@@ -45,7 +54,9 @@ void Screen::print(Image img, Coordinate start){
 
 Screen::~Screen(){
 	refresh();
-	nodelay(stdscr, FALSE);
+	Delay();
 	getch();
+	clear();
+	refresh();
 	endwin();
 }

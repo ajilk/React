@@ -9,13 +9,11 @@ using namespace std;
 class Image{
 private:
 	vector<char> image;
-	int color;
 public:
+	int color;
 	Image() :  color(0) {}
-	Image(string filename);
+	Image(string filename, int color);
 	void open(string filename);
-	void setColor(int color) { this->color = color; }
-	int getColor() { return color; }
 	vector<char> getImage() { return image; }
 };
 

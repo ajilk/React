@@ -11,7 +11,10 @@ class Screen{
 public:
 	Screen();
 	bool kbhit();
+	void flushInput();
 	void print(Image image, Coordinate start); 
+	void Delay() { nodelay(stdscr, false); };
+	void noDelay() { nodelay(stdscr, true); };
 	~Screen();
 };
 
