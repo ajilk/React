@@ -27,17 +27,20 @@ int main(){
 		string filename = "../resources/numbers/" + to_string(i) + ".txt";
 		numbers.push_back(*(new Image(filename, BLACK)));
 	}
-	
 
+	std::random_device rd;     // only used once to initialise (seed) engine
+	std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
+	std::uniform_int_distribution<int> uni(500,3000); // guaranteed unbiased
+	
 	char choice;
 	screen.noDelay();
 	do{
 		clear();
-		screen.print(title, *(new Coordinate(28, 62)));
+		screen.print(title, *(new Coordinate(28, 65)));
 		int i=0; 
 		screen.noDelay();
 		while(!screen.kbhit()){
-			screen.print(pyramid.at(i), *(new Coordinate(5, 62)));
+			screen.print(pyramid.at(i), *(new Coordinate(5, 65)));
 			if(i<pyramid.size()-1) i++;
 			else i=0;
 			refresh();
@@ -49,13 +52,14 @@ int main(){
 			case 'a':
 				char ch;
 				do{
+					int sleep = uni(rng);
 					dots.color = BLACK;
 					screen.print(dots, *(new Coordinate));
 					refresh();	
 					screen.noDelay(); //Make sure you don't wait for the player to mess up
 					int i=0;
 					//Change 200- to random number
-					while(i < 2000 && !screen.kbhit()){
+					while(i < sleep && !screen.kbhit()){
 						i++;
 						napms(1);
 					}
@@ -92,15 +96,6 @@ int main(){
 	}while(choice != 'q' && choice != 'Q');
 	clear();
 	screen.print(credits, *(new Coordinate(30, 90)));
-
-
-/*
-	timer.start();
-	screen.noDelay();
-	getch();
-	timer.stop();
-	screen.Delay();
-	mvprintw(0,0, "%.9f", timer.elapsed().count());*/
 	return 0;
 }
 
