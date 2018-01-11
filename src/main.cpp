@@ -5,19 +5,27 @@
 #include "Screen.h"
 #include "Timer.h"
 
+enum color{
+	BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE
+};
+
 int main(){
 	Screen screen;
 	Timer timer;
-	Image dots("../resources/dots.txt", 0);
-	Image splash("../resources/splash.txt", 0);
-	Image title("../resources/title.txt", 0);
-	Image credits("../resources/credits.txt", 0);
-	Image change("../resources/change.txt", 0);
-
+	Image dots("../resources/dots.txt", BLACK);
+	Image splash("../resources/splash.txt", BLACK);
+	Image title("../resources/title.txt", BLACK);
+	Image credits("../resources/credits.txt", BLACK);
+	Image change("../resources/change.txt", BLACK);
 	vector<Image> pyramid;
 	for(int i=0; i<18; i++){
 		string filename = "../resources/pyramid/" + to_string(i) + ".txt";
-		pyramid.push_back(*(new Image(filename, 1)));
+		pyramid.push_back(*(new Image(filename, BLUE)));
+	}
+	vector<Image> numbers;
+	for(int i=0; i<11; i++){
+		string filename = "../resources/numbers/" + to_string(i) + ".txt";
+		numbers.push_back(*(new Image(filename, BLACK)));
 	}
 	
 
@@ -33,7 +41,7 @@ int main(){
 			if(i<pyramid.size()-1) i++;
 			else i=0;
 			refresh();
-			napms(100);
+			napms(80);
 		}
 		screen.Delay();
 		choice = getch();
@@ -41,7 +49,7 @@ int main(){
 			case 'a':
 				char ch;
 				do{
-					dots.color = 0;
+					dots.color = BLACK;
 					screen.print(dots, *(new Coordinate));
 					refresh();	
 					screen.noDelay(); //Make sure you don't wait for the player to mess up
@@ -53,18 +61,27 @@ int main(){
 					}
 					//If keyboard was hit
 					if(screen.kbhit()){
-						change.color = 2;
+						change.color = RED;
 						screen.print(change, *(new Coordinate));
 						refresh();
 						screen.flushInput();
 					}else{
-						change.color = 1;
+						change.color = BLUE;
 						screen.print(change, *(new Coordinate));
 						timer.start();
 						screen.Delay();
 						if(screen.kbhit())
 							timer.stop();
-						mvprintw(0,0, "%0.5f", timer.elapsed().count());
+						string elapsed = to_string(timer.elapsed().count());
+						Coordinate offset;
+						clear();
+						for(int i=0; i<6; i++){
+							int number;
+							if(elapsed.at(i) != '.') number = elapsed.at(i) - '0';
+							else number = 10;
+							screen.print(numbers.at(number), *(new Coordinate(27, 70+offset.X)));
+							offset.X += 12;
+						}
 						ch = getch();
 					}
 					ch = getch();
