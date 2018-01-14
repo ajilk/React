@@ -35,7 +35,7 @@ int main(){
 	char choice;
 	screen.noDelay();
 	do{
-		clear();
+		erase();
 		screen.print(title, *(new Coordinate(28, 65)));
 		int i=0; 
 		screen.noDelay();
